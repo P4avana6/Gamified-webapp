@@ -1,0 +1,248 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body::before {
+  content: "";
+  background: url('dholakpur.jpg') no-repeat center center fixed; /* Ensuring the background covers the entire viewport */
+  background-size:cover;
+  position: fixed; /* Making the background fixed */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5; /* Adjust the opacity for transparency */
+  z-index: -1; /* Ensuring it stays behind the content */
+}
+
+body {
+  font-family: "Permanent Marker", cursive;
+  position: relative;
+  z-index: 1; /* Bringing the body content above the background */
+  color: #fff; /* Change text color to white for better visibility */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Adding a text shadow for prominence */
+}
+
+/* Adding an overlay for better readability */
+/*body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Black overlay with 30% opacity */
+  /*z-index: 0; /* Ensuring it stays behind the content but above the background */
+
+
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrapper,
+.button-wrapper {
+  text-align: center;
+  margin: 10px;
+}
+
+.outside-wrapper {
+    margin-bottom: 20px;
+    text-align: center;
+    justify-content: flex-start;
+    width: 100vw; /* Span the full width of the viewport */
+    position: relative; /* Ensure it's positioned relative to the screen */
+}
+
+.outside-wrapper:nth-child(2) {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  max-height: 300px;
+}
+
+.outside-wrapper:nth-child(3) {
+  margin-bottom: auto;
+  height: 178px;
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+#statusMessage {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 470px;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  height: 94px;
+}
+h1 {
+  font-size: 3em;
+  margin: .67em 0;
+  color: #265d43;
+}
+
+svg {
+  transform: rotate(-1deg);
+}
+
+.lives {
+  width: 110px;
+  height: 110px;
+}
+
+.hiddenLife {
+  display: inline-block;
+  animation: lifeAway 0.6s forwards;
+}
+
+@keyframes lifeAway {
+  0% {
+    opacity: 1;
+  }
+
+  10% {
+    transform: scale(1.5) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(0.5) rotate(720deg);
+  }
+
+  100% {
+    transform: scale(0) rotate(720deg);
+    opacity: 0;
+    display: none;
+  }
+}
+
+#categoryName {
+  font-size: 30px;
+  margin: 5px 5px 5px 5px;
+  color: #092518;
+}
+
+#warningText {
+  color: rgb(239, 83, 80);
+}
+
+.warning {
+  height: 20px;
+}
+
+#guessWrapper p {
+  font-size: 40px;
+  display: inline-block;
+  letter-spacing: 15px;
+  margin-bottom: 20px;
+  margin-top: 0;
+  color: green;
+}
+
+.inside-wrapper {
+  text-align: center;
+  justify-content: flex-start;
+    width: 100vw; /* Span the full width of the viewport */
+    position: relative; /* Ensure it's positioned relative to the screen */
+}
+
+.inside-wrapper:first-child {
+  width: 250px;
+}
+
+.inside-wrapper:last-child {
+  width: 400px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+    width: 50vw; /* Span the full width of the viewport */
+    position: relative; /* Ensure it's positioned relative to the screen */
+}
+
+.inside-wrapper div:last-child {
+  margin-top: auto;
+}
+
+#wrongLetters {
+  text-align: right;
+}
+
+#wrongLetters span {
+  text-align: right;
+  color: rgb(239, 83, 80);
+  letter-spacing: 5px;
+}
+
+@media (max-width: 470px) {
+  #categoryName {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .lives {
+    width: 25px;
+    height: auto;
+  }
+
+  #guessWrapper p {
+    font-size: 20px;
+  }
+}
+
+input {
+  border-radius: 7px;
+  border-style: none;
+  border: 1px solid gray;
+  text-align: center;
+  transition: 0.2s linear;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid green;
+}
+
+button {
+  transition: 0.2s linear;
+  outline: none;
+  border-style: none;
+  background-color: darkgray;
+  color: black;
+  border-radius: 7px;
+}
+
+button:hover,
+button:focus {
+  background-color: green;
+  outline: none;
+  color: white;
+}
+
+.logo {
+  width: 50px;
+  background-color: #265d43;
+  padding:1px;
+  border-radius: 60%;
+  transform: rotate(180deg);
+  margin: 10px 0 0 10px;
+}
+
+input,
+button {
+  padding: 5px 10px;
+  box-sizing: border-box;
+  letter-spacing: 3px;
+}

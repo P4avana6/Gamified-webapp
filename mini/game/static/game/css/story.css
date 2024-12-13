@@ -1,0 +1,138 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(to bottom, #8e2de2, #4a00e0); /* Dark purple gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    overflow: auto; /* Prevents scrollbars from appearing */
+}
+
+#main-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: #ffffff; /* White background for the main container */
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    margin-top:50px;
+    margin-bottom:50px;
+    width:600px;
+    height:600px;
+}
+
+#story-container {
+    background-color: #ffffff; /* White background */
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    max-width: 100em;
+    height: 35em;
+    text-align: center;
+    position: relative;
+    animation: fadeIn 2s;
+}
+
+h1 {
+    color: #d32f2f; /* Bright red for headers */
+    font-size:1.8 em; /* Larger header text */
+    margin-bottom: 20px;
+}
+
+.back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+#character-images {
+    display: flex;
+    justify-content:space-around;    
+    margin-bottom: 20px;
+    margin-left: 00px;
+}
+
+#character-image1, #character-image2 {
+    height: 200px;
+    width: 200px;
+    border: 5px solid #d32f2f; /* Bright red border */
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+#character-image1:hover, #character-image2:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+#story-content {
+    font-size: 1.2em; /* Larger story text */
+    line-height: 1.4;
+    color: #333;
+}
+
+#choices-container {
+    margin-top: 20px;
+}
+
+.choice-button {
+    display: block;
+    background-color: #9c27b0; /* Darker purple */
+    color: white;
+    padding: 15px;
+    margin: 15px 0;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 250px;
+    max-height: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    text-align: center;
+    font-size: 15px; /* Larger text for better readability */
+    animation: bounceIn 1.5s;
+}
+
+.choice-button:hover {
+    background-color: #7b1fa2; /* Even darker purple */
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+#restart-message {
+    background-color: #e1bee7; /* Light purple background */
+    border: 3px solid #ab47bc; /* Medium purple border */
+    border-radius: 20px;
+    padding: 5px;
+    margin-top: 10px;
+    max-height: 80px;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    font-size: 16px; /* Larger restart message text */
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounceIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.1); }
+    100% { transform: scale(1); }
+}

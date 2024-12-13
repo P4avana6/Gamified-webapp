@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Comic Sans MS', sans-serif;
+            background-image: url({% static 'game/images/bg_reg.jpg' %});
+            background-size: cover;
+            background-color: #f0f8ff; /* Fallback color */
+        }
+
+        .container {
+            background-color: rgb(255, 255, 255);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Comic Sans MS', sans-serif;
+            color: #ff6347; /* Tomato */
+            margin-bottom: 20px;
+        }
+
+        form p, form a {
+            font-family: 'Comic Sans MS', sans-serif;
+        }
+
+        button, a {
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Comic Sans MS', sans-serif;
+        }
+
+        button {
+            background-color: #32cd32; /* Lime Green */
+            color: white;
+            width: 100%;
+        }
+
+        a {
+            background-color: #4682b4; /* Steel Blue */
+            color: white;
+            width: 95%;
+        }
+
+        a:hover, button:hover {
+            opacity: 0.9;
+        }
+
+        .conditions {
+            display: none;
+            text-align: left;
+            color: #FF6347;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Register</h2>
+        <form id="registerForm" method="POST" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div>
+                <label for="id_username">Username:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                <input type="text" id="id_username" name="username">
+                <div id="usernameConditions" class="conditions">
+                    <ul>
+                        <li>150 characters or fewer</li>
+                        <li>Letters, digits and @/./+/-/_ only</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <label for="id_email">Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                <input type="email" id="id_email" name="email">
+            </div>
+            <div>
+                <label for="id_password">Password:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                <input type="password" id="id_password" name="password">
+                <div id="passwordConditions" class="conditions">
+                    <ul>
+                        <li>Your password can't be too similar to your other personal information</li>
+                        <li>Your password must contain at least 8 characters</li>
+                        <li>Your password can't be a commonly used password</li>
+                        <li>Your password can't be entirely numeric</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <label for="id_password2">Password confirmation:</label>
+                <input type="password" id="id_password2" name="password2">
+            </div>
+            <a href="{% url 'login' %}" type="button">Back To Login Page</a><br><br>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <script>
+        function validateForm() {
+            var isValid = true;
+            var username = document.getElementById('id_username').value;
+            var password = document.getElementById('id_password').value;
+            var password2 = document.getElementById('id_password2').value;
+
+            if (!/^[\w.@+-]+$/.test(username) || username.length > 150) {
+                document.getElementById('usernameConditions').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('usernameConditions').style.display = 'none';
+            }
+
+            if (password.length < 8 || 
+                /^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password) === false || 
+                password.toLowerCase() == username.toLowerCase() || 
+                ['password', '12345678'].includes(password)) {
+                document.getElementById('passwordConditions').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('passwordConditions').style.display = 'none';
+            }
+
+            if (password !== password2) {
+                alert("Passwords do not match");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>

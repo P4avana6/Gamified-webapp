@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>whizzWing Zone</title>
+    <link rel="stylesheet" href="{% static 'game/css/home.css' %}">
+    <style>
+        .abt-cnt {
+        display: flex; /* Changed to flex to align items centrally */
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap:nowrap;
+        align-items: baseline;
+  }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">whizzWing Zone</div>
+            <ul>
+                <li><a href="{% url 'home' %}" id="hvr">Home</a></li>
+                <li><a href="{% url 'about' %}" id="hvr">About</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}" id="hvr">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <section id="hero">
+        <img src="{% static 'game/images/bee.png' %}" alt="Flying Bee" id="flying-bee">
+        <h1>About <h1 id="blue">whizzWing Zone</h1></h1>
+        <img src="{% static 'game/images/bee.png' %}" alt="Flying Bee" id="flying-bee2">
+        <img src="{% static 'game/images/clouds1.png' %}" alt="Cloud 1" class="cloud" id="cloud1">
+        <img src="{% static 'game/images/clouds1.png' %}" alt="Cloud 2" class="cloud" id="cloud2">
+        <div class="grass-container">
+            <img src="{% static 'game/images/grass.gif' %}" alt="Grass" id="grass">
+        </div>
+        <img src="{% static 'game/images/grass.gif' %}" alt="Grass" id="grass1">
+    </section>
+    
+    <section id="image-grid">
+        <div class="abt-cnt">
+            <p style="text-align: justify; margin-left: 20px; margin-right: 20px;">
+                Welcome to whizzWing Zone<br>
+            
+                We believe that every child deserves to know their rights in a fun and engaging way. Our mission is to make learning about children's rights easy and enjoyable through interactive games. Whether it's playing hangman, enjoying a game of tic-tac-toe, answering quizzes, or exploring exciting story scenarios, we aim to teach important values and rights in a way that children can understand and remember.
+                
+                Our team is dedicated to creating educational experiences that are both entertaining and informative. We know that learning is best when it’s fun, so we’ve designed our games to make discovering your rights an adventure.
+                
+                Thank you for joining us on this journey to empower children with knowledge about their rights. We hope you have a great time exploring and learning with us!<br>
+                
+                Our Values:
+                <ul style="margin-left: 20px; margin-right: 20px;">
+                    <li>Education: Helping children understand their rights in an engaging way.</li>
+                    <li>Fun: Making learning enjoyable through interactive games and quizes.</li>
+                    <li>Empowerment: Giving children the knowledge needed for development.</li>
+                    
+                </ul>
+                Enjoy playing and learning with us!
+            </p>
+            <!-- Add more games as needed -->
+        </div>
+    </section>
+        
+    <footer>
+        <p>&copy; 2024 MyWebsite. All rights reserved.</p>
+    </footer>
+    <script src="{% static 'game/js/home.js' %}"></script>
+</body>
+</html>

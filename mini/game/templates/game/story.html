@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Hub</title>
+    {% load static %}
+  <link rel="stylesheet" href="{% static 'game/css/storyhome.css' %}">
+  <style>
+    header {
+        background-color: #39cec6;
+        padding: 20px;
+        text-align: center;
+    }
+    body{
+        background-color: #a0e1de;
+    }
+    .back-button {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 10px 20px;
+        background-color: #fff;
+        color: #333;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+</style>
+</head>
+<body>
+    <header>
+        <a href="javascript:history.back()" class="back-button">Back</a>
+        <h1>Welcome to the Story Hub!</h1>
+        <p>Select a story to begin an adventure!</p>
+    </header>
+    <main>
+        <div class="story-box">
+            <img src="{% static 'game/images/saniawalking1.png' %}" alt="Sania's Story"> 
+            <h2>Sania's Story</h2>
+            <a href="{% url 'Sanstory' %}" class="button">Start Sania's Story</a>
+        </div>
+        <div class="story-box">
+            <img src="{% static 'game/images/rihaanwalking1.png' %}" alt="Rihaan's Story">
+            <h2>Rihaan's Story</h2>
+            <a href="{% url 'Rihstory' %}"  class="button">Start Rihaan's Story</a>
+        </div>
+    </main>
+</body>
+</html>

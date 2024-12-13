@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos Page</title>
+    <link rel="stylesheet" href="{% static 'game/css/videos.css' %}">
+</head>
+<body>
+    <div class="creeper-container">
+        <img src="{% static 'game/images/creep444.png' %}" alt="Creeper Plant" class="creeper creeper1">
+        <img src="{% static 'game/images/creep555.png' %}" alt="Creeper Plant" class="creeper creeper4">
+        <img src="{% static 'game/images/creep222.png' %}" alt="Creeper Plant" class="creeper creeper2">
+        <img src="{% static 'game/images/creep333.png' %}" alt="Creeper Plant" class="creeper creeper3">
+        <!-- Add more creeper images as needed -->
+    </div>
+    <header>
+        <a href="javascript:history.back()" class="back-button">Back</a>
+        <h1>Educational Videos Page</h1>
+    </header>
+    <main>
+        <ul class="video-list">
+            <li class="video-item">
+                <a href="https://youtu.be/5KQGz-toMnk?si=pTGZGxzEmk9_amKD" target="_blank">
+                    <img src="https://img.youtube.com/vi/5KQGz-toMnk/mqdefault.jpg" alt="Video 1">
+                    <div class="video-info">
+                        <span class="video-title">Video 1: Rights of the Child animation</span>
+                        <span class="video-details">Equality and Human Rights Commission • 378K views</span>
+                        <div class="video-duration">03:08</div>
+                    </div>
+                </a>
+            </li>
+            <li class="video-item">
+                <a href="https://youtu.be/GAYVZD0yV2w?si=qREhrIHnlOhWSith" target="_blank">
+                    <img src="https://img.youtube.com/vi/GAYVZD0yV2w/mqdefault.jpg" alt="Video 2">
+                    <div class="video-info">
+                        <span class="video-title">Video 2: Equality and Human Rights Commission</span>
+                        <span class="video-details">Best Kids TV Movies • 22K views  </span>
+                        <div class="video-duration">08:52</div>
+                    </div>
+                </a>
+            </li>
+            <li class="video-item">
+                <a href="https://youtu.be/FWwEMFSY1r0?si=cuexsIs8op5LDjcp" target="_blank">
+                    <img src="https://img.youtube.com/vi/FWwEMFSY1r0/mqdefault.jpg" alt="Video 3">
+                    <div class="video-info">
+                        <span class="video-title">Video 3: Rights and Responsibilities for Kids | What is the difference?</span>
+                        <span class="video-details">Learn Bright • 100K views</span>
+                        <div class="video-duration">05:37</div>
+                    </div>
+                </a>
+            </li>
+            <!-- Add more video links here -->
+            <li class="video-item">
+                <a href="https://youtu.be/aJoGct2vJrI?si=2a87zebQYnXy7WHC" target="_blank">
+                    <img src="https://img.youtube.com/vi/aJoGct2vJrI/mqdefault.jpg" alt="Video 2">
+                    <div class="video-info">
+                        <span class="video-title">Video 4: The Rights of the Children | Child Rights Song | Now I Know Our Rights, Too!</span>
+                        <span class="video-details">JunyTony - Songs and Stories • 244K views</span>
+                        <div class="video-duration">04:15</div>
+                    </div>
+                </a>
+            </li>
+            <li class="video-item">
+                <a href="https://youtu.be/6F7ie1Z07aM?si=yioIrAVlHl9jMYR7" target="_blank">
+                    <img src="https://img.youtube.com/vi/6F7ie1Z07aM/mqdefault.jpg" alt="Video 2">
+                    <div class="video-info">
+                        <span class="video-title">Video 5: We all have rights I UNICEF</span>
+                        <span class="video-details">UNICEF • 357K views</span>
+                        <div class="video-duration">14:45</div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>

@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Comic Sans MS', sans-serif;
+            background-image:url({% static 'game/images/bg_reg.jpg' %}); /* Use the same playful background */
+            background-size: cover;
+            background-color: #f0f8ff; /* Fallback color */
+        }
+        
+        .container {
+            background-color: rgb(255, 255, 255);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        h2 {
+            font-family: 'Comic Sans MS', sans-serif;
+            color: #ff6347; /* Tomato */
+            margin-bottom: 20px;
+        }
+        
+        form p, form a {
+            font-family: 'Comic Sans MS', sans-serif;
+        }
+        
+        button, a {
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Comic Sans MS', sans-serif;
+        }
+        
+        button {
+            background-color: #32cd32; /* Lime Green */
+            color: white;
+            width: 100%;
+        }
+        
+        a {
+            background-color: #4682b4; /* Steel Blue */
+            color: white;
+            width: 95%;
+        }
+        
+        a:hover, button:hover {
+            opacity: 0.9;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p>Are you new? <a href="{% url 'register' %}">Create an account</a></p><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</html>

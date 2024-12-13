@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rihaan's Right to Learn</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'game/css/story.css' %}">
+</head>
+<body>
+    <a href="javascript:history.back()" class="back-button">Back</a>
+    <div id="main-container">
+        <div id="story-container">
+            <h1>Rihaan's Right to Learn</h1>
+            <div id="character-images">
+                <img id="character-image1" src="" alt="Character 1">
+                <img id="character-image2" src="" alt="Character 2">
+            </div>
+            <div id="story-content"></div>
+            <button id="speaker-button">🔊</button>
+            <div id="choices-container"></div>
+            <div id="restart-message" class="hidden">
+                <p>Good job! You made the right choice! <br>
+                    Play again to see how other choices lead to different outcomes!
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const storyContent = document.getElementById('story-content');
+        const choicesContainer = document.getElementById('choices-container');
+        const characterImage1 = document.getElementById('character-image1');
+        const characterImage2 = document.getElementById('character-image2');
+        const restartMessage = document.getElementById('restart-message');
+        const speakerButton = document.getElementById('speaker-button');
+
+        const story = {
+            start: {
+                text: "Rihaan is a bright 10-year-old boy who loves going to school. He dreams of becoming a teacher one day. However, his family is struggling financially, and his father wants him to start working to help support them.",
+                image1: '{% static "game/images/school.jpg" %}',
+                image2:  '{% static "game/images/farmer.jpeg" %}',
+                choices: [
+                    { text: "Agree to Go to Work", nextScene: 'factory' },
+                    { text: "Talk to His Teacher", nextScene: 'teacher' }
+                ]
+            },
+            factory: {
+                text: "The factory is noisy and filled with other children working. Rihaan feels tired and out of place.",
+                image1: '{% static "game/images/factorychildren.jpeg" %}',
+                choices: [
+                    { text: "Try to Learn from the Older Workers", nextScene: 'learn' },
+                    { text: "Look for a Way to Escape", nextScene: 'escape' }
+                ]
+            },
+            learn: {
+                text: "Rihaan tries to make the best of his situation by learning from the older workers. He still misses school, but he’s determined to learn something new.",
+                image1: '{% static "game/images/worker.jpeg" %}',
+                choices: [
+                    { text: "Play Again!", nextScene: 'start' }
+                ]
+            },
+            escape: {
+                text: "Rihaan makes a run for it through the open gate. He heads straight to his school, hoping to find Mrs. Sharma.",
+                image1: '{% static "game/images/gate.jpeg" %}',
+                choices: [
+                    { text: "Seek Help from a Police Officer", nextScene: 'police' },
+                    { text: "Head Directly to School", nextScene: 'school' }
+                ]
+            },
+            teacher: {
+                text: "Mrs. Sharma listens carefully to Rihaan’s problem. She knows how important education is for him.",
+                image1: '{% static "game/images/sharma.jpeg" %}',
+                choices: [
+                    { text: "Ask for Legal Help", nextScene: 'legal' },
+                    { text: "Speak with Rihaan’s Father", nextScene: 'speak' }
+                ]
+            },
+            legal: {
+                text: "With the support of the NGO and Mrs. Sharma, Rihaan’s father realizes the importance of education. He agrees to let Rihaan return to school.",
+                image1: '{% static "game/images/legal help.jpeg" %}',
+                choices: [
+                    { text: "Play Again!", nextScene: 'start' }
+                ]
+            },
+            speak: {
+                text: "Mrs. Sharma speaks directly with Rihaan’s father to explain the importance of education and finds a solution.",
+                image1: '{% static "game/images/meeting.jpg" %}',
+                choices: [
+                    { text: "Play Again!", nextScene: 'start' }
+                ]
+            },
+            police: {
+                text: "The police officer helps Rihaan. They ensure he gets back to school and address his family's financial struggles through community support.",
+                image1: '{% static "game/images/police.jpg" %}',
+                choices: [
+                    { text: "Play Again!", nextScene: 'start' }
+                ]
+            },
+            school: {
+                text: "Mrs. Sharma helps Rihaan. They ensure he gets back to school and address his family's financial struggles through community support.",
+                image1: '{% static "game/images/school1.jpeg" %}',
+                choices: [
+                    { text: "Play Again!", nextScene: 'start' }
+                ]
+            },
+            end: {
+                text: "Rihaan’s determination to pursue his right to education helps him overcome a difficult situation. With the support of his teacher and community, he continues his studies and inspires others to fight for their rights.",
+                image1: '{% static "game/images/childrights.jpeg" %}',
+                choices: [
+                    { text: "Play Again!", nextScene: 'start' }
+                ]
+            }
+        };
+
+        function displayScene(scene) {
+            const currentScene = story[scene];
+            storyContent.innerHTML = currentScene.text;
+            choicesContainer.innerHTML = '';
+
+            // Display images
+            if (currentScene.image1) {
+                characterImage1.src = currentScene.image1;
+                characterImage1.style.display = 'inline';
+            } else {
+                characterImage1.style.display = 'none';
+            }
+
+            if (currentScene.image2) {
+                characterImage2.src = currentScene.image2;
+                characterImage2.style.display = 'inline';
+            } else {
+                characterImage2.style.display = 'none';
+            }
+
+            // Add choices
+            currentScene.choices.forEach(choice => {
+                const button = document.createElement('button');
+                button.className = 'choice-button';
+                button.innerHTML = choice.text;
+                button.onclick = () => displayScene(choice.nextScene);
+                choicesContainer.appendChild(button);
+            });
+
+            // Show restart message if there are no more choices
+            if (currentScene.choices.length === 1 && currentScene.choices[0].text === 'Play Again!') {
+                restartMessage.classList.remove('hidden');
+            } else {
+                restartMessage.classList.add('hidden');
+            }
+        }
+        speakerButton.addEventListener('click', () => {
+            const text = storyContent.innerText;
+            fetch(`/game/text-to-speech/?text=${encodeURIComponent(text)}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const audio = new Audio(url);
+                    audio.play();
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        // Start the story at start
+        displayScene('start');
+
+    </script>
+</body>
+</html>

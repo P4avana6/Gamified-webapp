@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sania's Brave Escape</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'game/css/story.css' %}">
+</head>
+<body>
+    <a href="javascript:history.back()" class="back-button">Back</a>
+    <div id="main-container">
+        <div id="story-container">
+            <h1>Sania's Brave Escape</h1>
+            <div id="character-images">
+                <img id="character-image1" src="" alt="Character 1">
+                <img id="character-image2" src="" alt="Character 2">
+            </div>
+            
+            <div id="story-content"></div>
+            <button id="speaker-button">🔊</button>
+
+            <div id="choices-container"></div>
+            <div id="restart-message" class="hidden">
+                <p>Good job you have made a right choice! <br>
+                    Restart the game to see how other choices lead to different outcomes!!
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const storyContent = document.getElementById('story-content');
+        const choicesContainer = document.getElementById('choices-container');
+        const characterImage1 = document.getElementById('character-image1');
+        const characterImage2 = document.getElementById('character-image2');
+        const restartMessage = document.getElementById('restart-message');
+        const speakerButton = document.getElementById('speaker-button');
+    
+        const story = {
+            scene1: {
+                text: `As Sania walks home, the red van pulls up beside her. The woman inside waves and says, “Hello, Sania! I have a special surprise for you. Would you like to come with me?”`,
+                image1: '{% static 'game/images/saniawalking1.png' %}',
+                image2: '{% static 'game/images/car3.jpeg' %}',
+                choices: [
+                    { text: "Trust the Woman and Get In", nextScene: 'scene2' },
+                    { text: "Politely Decline and Keep Walking", nextScene: 'scene3' }
+                ]
+            },
+            scene2: {
+                text: `The van takes a detour and stops at a secluded area. Mrs. Nara, the woman in the van, smiles and says, “We’re almost there!” But Sania notices that the van is parked near a rundown building.`,
+                image1: '{% static 'game/images/car2.jpeg' %}',
+                image2: '{% static 'game/images/rundown.jpeg' %}',
+                choices: [
+                    { text: "Try to Open the Van Door Quietly", nextScene: 'scene4' },
+                    { text: "Confront Mrs. Nara", nextScene: 'scene5' }
+                ]
+            },
+            scene3: {
+                text: `Sania thanks the woman but decides to continue walking home. The woman drives away, and Sania safely reaches her house.`,
+                image1: '{% static 'game/images/home.jpeg' %}',
+                choices: [
+                    { text: "Restart", nextScene: 'scene1' }
+                ]
+            },
+            scene4: {
+                text: `Hiding behind the bushes, Sania needs to find her way to safety. She sees a small convenience store in the distance.`,
+                image1: '{% static 'game/images/bush.jpeg' %}',
+                image2: '{% static 'game/images/store.jpg' %}',
+                choices: [
+                    { text: "Go to the Convenience Store", nextScene: 'scene6' },
+                    { text: "Explore the Area for Another Option", nextScene: 'scene7' }
+                ]
+            },
+            scene5: {
+                text: `Sania decides to ask Mrs. Nara what’s happening. Mrs. Nara’s smile fades, and she sternly tells Sania to stay put. Feeling scared, Sania waits for her chance to escape.`,
+                image1: '{% static 'game/images/woman.jpg' %}',
+                choices: [
+                    { text: "Restart", nextScene: 'scene1' }
+                ]
+            },
+            scene6: {
+                text: `The police arrive quickly, and Sania is reunited with her family. They express their relief and gratitude for her bravery.`,
+                image1: '{% static 'game/images/police.jpg' %}',
+                image2: '{% static 'game/images/fam.jpeg' %}',
+                choices: [
+                    { text: "Return Home with Your Family", nextScene: 'scene8' },
+                    { text: "Help Raise Awareness About Child Trafficking", nextScene: 'scene9' }
+                ]
+            },
+            scene7: {
+                text: `Sania decides to explore the area for another way to get help. She wanders around, but it becomes increasingly difficult to find a safe place.`,
+                image1: '{% static 'game/images/explore.jpg' %}',
+                choices: [
+                    { text: "Restart", nextScene: 'scene1' }
+                ]
+            },
+            scene8: {
+                text: `Sania goes home and discusses what happened with her family. They all feel grateful for her safety.`,
+                image1: '{% static 'game/images/discuss.jpeg' %}',
+                choices: [
+                    { text: "Restart", nextScene: 'scene1' }
+                ]
+            },
+            scene9: {
+                text: `Inspired by her experience, Sania works with local organizations to raise awareness about child trafficking and how to stay safe.`,
+                image1: '{% static 'game/images/awareness.jpeg' %}',
+                choices: [
+                    { text: "Restart", nextScene: 'scene1' }
+                ]
+            }
+        };
+    
+        function displayScene(scene) {
+            const currentScene = story[scene];
+            storyContent.innerHTML = currentScene.text;
+            choicesContainer.innerHTML = '';
+    
+            // Display images
+            if (currentScene.image1) {
+                characterImage1.src = currentScene.image1;
+                characterImage1.style.display = 'inline';
+            } else {
+                characterImage1.style.display = 'none';
+            }
+    
+            if (currentScene.image2) {
+                characterImage2.src = currentScene.image2;
+                characterImage2.style.display = 'inline';
+            } else {
+                characterImage2.style.display = 'none';
+            }
+    
+            // Add choices
+            currentScene.choices.forEach(choice => {
+                const button = document.createElement('button');
+                button.className = 'choice-button';
+                button.innerHTML = choice.text;
+                button.onclick = () => displayScene(choice.nextScene);
+                choicesContainer.appendChild(button);
+            });
+    
+            // Show restart message if there are no more choices
+            if (currentScene.choices.length === 1 && currentScene.choices[0].text === 'Restart') {
+                restartMessage.classList.remove('hidden');
+            } else {
+                restartMessage.classList.add('hidden');
+            }
+        }
+    
+        // Add event listener for text-to-speech button
+        speakerButton.addEventListener('click', () => {
+            const text = storyContent.innerText;
+            fetch(`/game/text-to-speech/?text=${encodeURIComponent(text)}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const audio = new Audio(url);
+                    audio.play();
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    
+        // Start the story at scene1
+        displayScene('scene1');
+    </script>
+    
+</body>
+</html>

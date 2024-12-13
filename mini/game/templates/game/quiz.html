@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ quiz.title }}</title>
+    <link rel="stylesheet" href="{% static 'game/css/quiz.css' %}">
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #fff;
+            background-color: rgba(0, 31, 63, 0.8);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            min-height: 100vh;
+        }
+        body::before {
+            content: "";
+            background-image: url('{% static "game/images/purple.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="{% url 'quiz_list' %}" style="color:white;text-decoration:none;"><img src="{% static 'game/images/logo.png' %}" alt="Logo">BACK</a>
+            </div>
+        </div>
+        <div class="header-content">
+            <h1>{{ quiz.title }}</h1>
+            <p id="points">Points: 0</p> <!-- Points display -->
+        </div>
+    </header>
+    <main>
+        <div class="quiz-content">
+            <section class="quiz-section">
+                {% for question in questions %}
+                <div class="question" id="question{{ forloop.counter }}">
+                    <h2>Question {{ forloop.counter }}</h2>
+                    <p style="font-size:18px;">{{ question.question_text }}</p>
+                    <div class="options">
+                        <form>
+                            {% csrf_token %}
+                            <input type="hidden" name="question_id" value="{{ question.id }}">
+                            <button class="option" name="option" value="{{ question.option1 }}">A. {{ question.option1 }}</button><br>
+                            <button class="option" name="option" value="{{ question.option2 }}">B. {{ question.option2 }}</button><br>
+                            <button class="option" name="option" value="{{ question.option3 }}">C. {{ question.option3 }}</button><br>
+                            <button class="option" name="option" value="{{ question.option4 }}">D. {{ question.option4 }}</button>
+                        </form>
+                    </div>
+                    <div class="result-message" id="result-message-{{ forloop.counter }}" style="font-size:20px;"></div> <!-- Result message div -->
+                </div>
+                {% endfor %}
+                <div class="navigation">
+                    <button id="prev">Previous</button>
+                    <button id="next">Next</button>
+                </div>
+            </section>
+            <div class="astronaut">
+                <img src="{% static 'game/images/astronaut.png' %}" alt="Astronaut">
+            </div>
+        </div>
+    </main>
+    <script src="{% static 'game/js/script.js' %}"></script>
+</body>
+</html>

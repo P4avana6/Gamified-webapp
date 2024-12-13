@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>whizzWing Zone</title>
+    <link rel="stylesheet" href="{% static 'game/css/home.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">whizzWing Zone</div>
+            <ul>
+                <li><a href="{% url 'home' %}" id="hvr">Home</a></li>
+                <li><a href="{% url 'about' %}" id="hvr">About</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}" id="hvr">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <section id="hero">
+        <img src="{% static 'game/images/bee.png' %}" alt="Flying Bee" id="flying-bee">
+        <h1>Welcome to <h1 id="blue">whizzWing Zone</h1></h1>
+        <p>Play and Learn!!!</p>
+        <img src="{% static 'game/images/bee.png' %}" alt="Flying Bee" id="flying-bee2">
+        <img src="{% static 'game/images/clouds1.png' %}" alt="Cloud 1" class="cloud" id="cloud1">
+        <img src="{% static 'game/images/clouds1.png' %}" alt="Cloud 2" class="cloud" id="cloud2">
+        <div class="grass-container">
+            <img src="{% static 'game/images/grass.gif' %}" alt="Grass" id="grass">
+        </div>
+        <img src="{% static 'game/images/grass.gif' %}" alt="Grass" id="grass1">
+    </section>
+    
+    <section id="image-grid">
+        <h2 class="grid-heading">GAMES</h2>
+        <div class="grid-container">
+            <div class="grid-item">
+                <a href="{% url 'quiz_list' %}"><img src="{% static 'game/images/quiz1.jpg' %}" alt="Game 1">
+                <div class="grid-item-title">Quizes</div></a>
+            </div>
+            <div class="grid-item">
+                <a href="{% url 'hangman_view' %}"><img src="{% static 'game/images/hang.jpeg' %}" style="width:200px;height:200px;object-fit: cover;" alt="Game 2">
+                <div class="grid-item-title">Hangman</div></a>
+              </div>
+              <div class="grid-item">
+                <a href="{% url 'TicTacToe' %}"><img src="{% static 'game/images/TicTacToe.jpeg' %}" alt="Game 3">
+                <div class="grid-item-title">TicTacToe</div></a>
+              </div>
+              <div class="grid-item">
+                <a href="{% url 'story' %}"><img src="{% static 'game/images/story.jpg' %}" alt="Game 4">
+                <div class="grid-item-title">StoryHub</div></a>
+              </div>
+              <div class="grid-item">
+                <a href="{% url 'vids' %}"><img src="{% static 'game/images/vid.jpg' %}" alt="Educational Videos">
+                <div class="grid-item-title">Videos</div></a>
+              </div>
+            <!-- Add more games as needed -->
+        </div>
+    </section>
+    
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Read about us in <a href="{% url 'about' %}" style="text-decoration:none;color: #01d0de;">About</a> page</p>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 whizzWing Zone. All rights reserved.</p>
+    </footer>
+    <script src="{% static 'game/js/home.js' %}"></script>
+</body>
+</html>

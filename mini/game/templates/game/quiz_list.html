@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz List</title>
+    <link rel="stylesheet" href="{% static 'game/css/quizlist.css' %}">
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #333;
+            background-color: #87CEEB; /* Doraemon blue */
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        .quiz-list {
+            position: relative;
+            margin-top: 230px; /* Adjust this value as needed to move the boxes down */
+            z-index: 2; /* Ensures quiz items are above the pocket image */
+        }
+        .quiz-item {
+            background-color: rgba(172, 218, 236, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            margin: 20px auto;
+            width: 80%;
+            max-width: 400px;
+        }
+        .quiz-item h2 {
+            color:  #ff0000;
+        }
+        .quiz-item p {
+            color: #333;
+        }
+        
+        .quiz-item a {
+            display: inline-block;
+            background-color: #0074D9;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .quiz-item a:hover {
+            background-color: #001f3f;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="{% url 'home' %}"><img src="{% static 'game/images/back.png' %}" alt="Logo"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                </ul>
+            </nav>
+            <div class="bell-container">
+                <img src="{% static 'game/images/DBells.png' %}" alt="Logo">
+            </div>
+        </div>
+        
+        <div class="header-content">
+            <h1>Select Quiz Level</h1>
+        </div>
+    </header>
+    <div class="pocket-container">
+        <img src="{% static 'game/images/pocket.png' %}" alt="Doraemon's Pocket">
+    </div>
+    <main>
+        <div class="quiz-list">
+            {% for quiz in quizzes %}
+            <div class="quiz-item">
+                <h2>{{ quiz.title }}</h2>
+                <a href="{% url 'quiz_view' quiz.id %}">Start Quiz</a>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+    <img src="{% static 'game/images/fly-doraemon.png' %}" alt="Flying Doraemon" class="flying-doraemon" id="flyingDoraemon">
+    <script src="{% static 'game/js/script.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const doraemon = document.getElementById('flyingDoraemon');
+        
+            let posX = window.innerWidth - doraemon.clientWidth - 20;
+            let posY = 15;
+            const speed = 0.5;
+        
+            function moveDoraemon() {
+                const maxX = window.innerWidth / 2 - doraemon.clientWidth; // Limiting movement to the left part of the screen
+                const maxY = window.innerHeight - doraemon.clientHeight;
+        
+                // Update position
+                posX += (Math.random() * 2 - 1) * speed;
+                posY += (Math.random() * 2 - 1) * speed;
+        
+                // Boundary conditions
+                if (posX < 0) posX = 0;
+                if (posX > maxX) posX = maxX;
+                if (posY < 0) posY = 0;
+                if (posY > maxY) posY = maxY;
+        
+                // Apply new position
+                doraemon.style.left = `${posX}px`;
+                doraemon.style.top = `${posY}px`;
+        
+                requestAnimationFrame(moveDoraemon);
+            }
+        
+            moveDoraemon();
+        });
+</script>
+</body>
+</html>
